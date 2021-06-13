@@ -1,0 +1,12 @@
+Student Name: Mark Su                  
+# of Courses: 1                        
+Course:              Grade:         
+MAth                 92             
+
+Student Name: John Snow                
+# of Courses: 3                        
+Course:              Grade:         
+ela                  100            
+gym                  88             
+history              91             
+
