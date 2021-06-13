@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <vector>
 #include <fstream>
+#include <regex>
 #include <string>
 
 using namespace std;
@@ -26,18 +27,19 @@ public:
 	vector<int> allTheNumOfCourses;
 	vector<vector<string>> allStudentCourseNames;
 	vector<vector<int>> allStudentGrades;
+	vector<bool> allDisciplineIssues;
 
 	//constructors
 	HonorRoll();  //default constructor
 	HonorRoll(string, int, int, int, vector<string>, vector<int>);
 
+	//validation
+	bool getValidInt(int &);
+
 	string askForName();
 
 	vector<string> askForCourse();
 	vector<int> askForGrades();
-
-	int calculateTotal();
-
 
 	int numCourses();
 
@@ -50,7 +52,9 @@ public:
 
 	void clearVectors();
 
-	void inputMenu();
+	char inputMenu();
+	//menu modes
+	void adminMode();
 
 	void fileOutput();
 };

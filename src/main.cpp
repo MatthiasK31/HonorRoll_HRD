@@ -30,15 +30,20 @@ int main() {
 
 		student.clearVectors();
 
+		char menuResult = student.inputMenu();
+		if (menuResult == 'a') {
+			name = student.askForName();
+			courses = student.numCourses();
 
-		name = student.askForName();
-		courses = student.numCourses();
+			//call method for a for loop that asks for all of the courses the user takes
+			allTheCourses = student.askForCourse();
 
-		//call method for a for loop that asks for all of the courses the user takes
-		allTheCourses = student.askForCourse();
-
-		//call method for a for loop that asks for all the course grades
-		everyGrade = student.askForGrades();
+			//call method for a for loop that asks for all the course grades
+			everyGrade = student.askForGrades();
+		}
+		if (menuResult == 'b') {
+			student.adminMode();
+		}
 
 		//print output
 		student.printOutput();

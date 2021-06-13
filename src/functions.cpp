@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "student.h"
+#include <regex>
 
 
 
@@ -19,6 +20,48 @@ HonorRoll::HonorRoll(string uName, int num, int allTotal, int mean, vector<strin
 
 }
 
+bool HonorRoll::getValidInt(int& t_int) 
+{
+	std::string intScratch = "";
+	bool isValid = true;
+
+
+	getline(cin, intScratch);
+	//remove all whitespace
+	std::regex r("\\s+");
+	intScratch = std::regex_replace(intScratch, r, "");
+	//rev 2 make sure only valid characters for an integer number are in the string
+	isValid = intScratch.find_first_not_of("-0123456789") == std::string::npos;
+	//Only 1 '-' allowed
+	if (std::count(intScratch.begin(), intScratch.end(), '-') > 1) {
+		isValid = false;
+		return isValid;
+	}
+	//make sure '-' is first char only
+	else if (std::count(intScratch.begin(), intScratch.end(), '-') > 0) {
+		if (intScratch.at(0) != '-') {
+			isValid = false;
+			return isValid;
+		}
+	}
+	//convert ONLY if string is contains valid integer characters
+	//all errors caught 
+	if (isValid) {
+		try {
+			t_int = stoi(intScratch);
+		}
+		catch (...) { //<---catches ALL errors - may want to give the user a more specific message.  Shown in next function
+			//bad user entry - don't care what it is, return invalid
+			isValid = false;
+		}
+	}
+	if (t_int < 0)
+		isValid = false;
+	else
+		isValid = true;
+
+	return isValid;
+}
 
 
 string HonorRoll::askForName()
@@ -254,12 +297,45 @@ void HonorRoll::clearVectors()
 	allCourseNames.clear();
 }
 
-void HonorRoll::inputMenu()
+char HonorRoll::inputMenu()
 {
 	string menuChoice;
-	cout << "Welcome to Honor Roll! What would you like to do today?\n\tA: Enter Student Data\n\tB: Enter Admin Mode\n\tC : Run Reportsn\n\tD : Exit Program\n";
-
+	cout << "Welcome to Honor Roll! What would you like to do today?\n\tA: Enter Student Data\n\tB: Enter Admin Mode\n\tC: Run Reportsn\n\tD: Exit Program\n";
+	getline(cin, menuChoice);
+	if (menuChoice.length() == 0 || menuChoice == " " || menuChoice.length() > 1 || !isalpha(menuChoice.at(0))) {
+		while (true) {
+			cout << "Enter a valid letter choice: ";
+			getline(cin, menuChoice);
+			if (menuChoice.length() == 1 && menuChoice != " " && isalpha(menuChoice.at(0)))
+				break;
+		}
+	}
+	return menuChoice.at(0);
 }
+
+void HonorRoll::adminMode()
+{
+	int adminPassword = 1111, guess;
+	string letters = "abcdefghijklmnopqrstuvwxyz";
+	cout << "Enter the password to enter administrator mode: ";
+	while (!getValidInt(guess)) {
+		cout << "\tEnter a valid number:\t";
+	}
+
+	if (guess == adminPassword) {
+		if (allNames.size() == 0) {
+			cout << "Invalid password. ";
+		}
+		else {
+			cout << "Which student would you like to display a disciplinary infraction for?" << endl;
+			for (int i = 0; i < allNames.size(); i++) {
+				printf("%-1c . %-25s", letters.at(i), allNames.at(i).c_str());
+			}
+		}
+
+	}
+}
+
 
 void HonorRoll::fileOutput()
 {
