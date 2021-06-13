@@ -140,11 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\functions.cpp" />
-    <ClCompile Include="src\GetValidData.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GetData.h" />
     <ClInclude Include="src\student.h" />
   </ItemGroup>
   <ItemGroup>
