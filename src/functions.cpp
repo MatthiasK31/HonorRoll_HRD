@@ -277,5 +277,5 @@ void HonorRoll::fileOutput()
 			fprintf(fout, "%-20s %-15d\n", allStudentCourseNames.at(i).at(j).c_str(), allStudentGrades.at(i).at(j));
 		}
 		fprintf(fout, "\n");
-	}
+	} 
 }
