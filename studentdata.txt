@@ -1,0 +1,13 @@
+Student Name: jon smith                
+# of Courses: 1                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+math                 98             
+
+Student Name: mark su                  
+# of Courses: 2                        
+Disciplinary Infraction: YES
+Course:              Grade:         
+ela                  98             
+sci                  87             
+
