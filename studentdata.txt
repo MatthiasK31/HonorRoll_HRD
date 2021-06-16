@@ -1,13 +1,84 @@
-Student Name: jon smith                
-# of Courses: 1                        
-Disciplinary Infraction: NO
-Course:              Grade:         
-math                 98             
-
-Student Name: mark su                  
-# of Courses: 2                        
+Student Name: Iiiiiii Jjj              
+# of Courses: 8                        
 Disciplinary Infraction: YES
 Course:              Grade:         
-ela                  98             
-sci                  87             
+A1                   95             
+Bb 2                 91             
+Ccc 3                92             
+Dddd 4               100            
+Eeeee 5              93             
+Ffffff 6             95             
+Ggggggg 7            95             
+Hhhhhhhh 8           97             
+
+Student Name: Ccccc Dddddddddd         
+# of Courses: 8                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+A1                   50             
+Bb 2                 71             
+Ccc 3                71             
+Dddd 4               80             
+Eeeee 5              65             
+Ffffff 6             78             
+Ggggggg 7            78             
+Hhhhhhhh 8           68             
+
+Student Name: Ll Mmm                   
+# of Courses: 4                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+Computer Science     100            
+Biology              90             
+Chemistry            99             
+Calculus 1           97             
+
+Student Name: Ffff Gggggg              
+# of Courses: 4                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+Computer Science     75             
+Biology              78             
+Chemistry            90             
+Calculus 1           90             
+
+Student Name: Aaa Bbbbbb               
+# of Courses: 8                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+A1                   95             
+Bb 2                 91             
+Ccc 3                92             
+Dddd 4               100            
+Eeeee 5              93             
+Ffffff 6             95             
+Ggggggg 7            95             
+Hhhhhhhh 8           97             
+
+Student Name: H H                      
+# of Courses: 5                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+A1                   50             
+Bb 2                 71             
+Ccc 3                71             
+Dddd 4               80             
+Eeeee 5              65             
+
+Student Name: Eeeee Eeeee              
+# of Courses: 4                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+Computer Science     100            
+Biology              90             
+Chemistry            99             
+Calculus 1           97             
+
+Student Name: Kkkkk Kkkkkkkk           
+# of Courses: 3                        
+Disciplinary Infraction: NO
+Course:              Grade:         
+Computer Science     75             
+Chemistry            78             
+Calculus 1           90             
 

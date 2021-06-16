@@ -4,14 +4,15 @@ Honor Roll Deluxe
 Mrs. Digiovanna
 6/16/21
 
-Extra: asked students for his/her favorite teacher
-
-Known Bugs:
+Known Bugs/Defects:
 	- sort will not work after another student is added
 	- alphabetical sorts are not used
 	- names are not sorted by last name
 	- requirement #38: the two students will not be printed in alphabetical order if their gpa is the same
 	- requirement #37: the program doesn't strip out spaces
+	- Disciplinary issues don't work either, they are assigned by default but the assigning part doesnt work as expected
+	- average rounds down instead of up.
+	- did not re-serach if the name does not exist
 */
 
 #include <iostream>
@@ -19,6 +20,7 @@ Known Bugs:
 #include <string>
 #include <vector>
 #include <fstream>
+#include <climits>
 #include "student.h"
 #include <regex>
 
@@ -37,7 +39,7 @@ HonorRoll::HonorRoll(string uName, int num, int allTotal, int mean, vector<strin
 }
 
 //input validation
-bool HonorRoll::getValidInt(int& t_int) 
+bool HonorRoll::getValidInt(int& t_int)
 {
 	std::string intScratch = "";
 	bool isValid = true;
@@ -102,7 +104,6 @@ string HonorRoll::askForName()
 
 	studentName = first + " " + last;
 	allNames.push_back(studentName);
-	cout << "pushed back!" << endl;
 	count++;
 	return studentName;
 }
@@ -159,7 +160,7 @@ vector<int> HonorRoll::askForGrades()
 	//for loop to iterate through the courses and ask for the grade in each course
 	for (int i = 0; i < numberOfCourses; i++) {
 		//prompt user
-		cout << "Enter your final " << allCourseNames.at(i) << " grade:\t";
+		cout << "Enter your final " << allCourseNames.at(i) << " grade: ";
 		cin.clear();
 		string grade = ""; getline(cin, grade);
 		//while loop to ask user for a new grade while they are invalid
@@ -270,7 +271,7 @@ void HonorRoll::fullHonorRollReport()
 		printf("%-30s%-30s\n", "Course", "Grade");
 		for (int j = 0; j < allStudentCourseNames.at(i).size(); j++)
 		{
-			
+
 			printf("%-30s %-30d\n", allStudentCourseNames.at(i).at(j).c_str(), allStudentGrades.at(i).at(j));
 		}
 		cout << "\nYour final average across all " << allTheNumOfCourses.at(i) << " of your courses is " << allAverages.at(i) << "." << endl;
@@ -366,17 +367,23 @@ void HonorRoll::enterStudent()
 void HonorRoll::adminMode()
 {
 	//initialize variables
-	int adminPassword = 1111, guess;
+	int adminPassword = 1111, guess = 0;
 	string response;
-	cout << "Enter the password to enter administrator mode: ";
+
 	//while the guess is incorrect, ask if they want to exit, otherwise keep asking for password
-	while (guess != adminPassword){
+	while (guess != adminPassword) {
+		cout << "Enter the password to enter administrator mode: ";
+		cin >> guess;
+		if (guess == adminPassword)
+			break;
 		cout << "Would you like to exit? (y/n) ";
 		getline(cin, response);
 		if (response == "y")
-			return;
-		else
+			break;
+		else {
+			cin.ignore(INT_MAX, '\n');
 			continue;
+		}
 	}
 	//what to do if password is right
 	if (guess == adminPassword) {
@@ -391,7 +398,7 @@ void HonorRoll::adminMode()
 				//ask to enter a disciplinary infraction
 				cout << "Would you like to assign a disciplinary infraction to this student? (y/n) ";
 				cin >> enter;
-				
+
 				if (enter == 'y')
 					hasDisciplineIssue = true;
 
@@ -403,7 +410,7 @@ void HonorRoll::adminMode()
 				cin.ignore(INT_MAX, '\n');
 			else
 				cin.ignore(INT_MAX, '\n');
-				
+
 		}
 		else {
 			askWhichStudent();
@@ -442,7 +449,7 @@ void HonorRoll::askWhichStudent()
 
 	//change the infraction status in the vector at that position to true
 	allDisciplineIssues.at(l) = true;
-	cin.ignore(INT_MAX, '\n');
+	//cin.ignore(INT_MAX, '\n');
 }
 
 ////////////////////////////////////////////////////
@@ -584,7 +591,7 @@ void HonorRoll::disciplinaryReport()
 	//will only print the student's name if the student HAS an infraction
 	for (int i = 0; i < allNames.size(); i++) {
 		if (allDisciplineIssues.at(i) == true)
-			printf("%-25d%-20s\n", i+1, allNames.at(i).c_str());
+			printf("%-25d%-20s\n", i + 1, allNames.at(i).c_str());
 		else {
 			falseCount++;
 			continue;
@@ -604,7 +611,7 @@ void HonorRoll::clearVariables()
 }
 
 //bubble sort (i tried to sort this)
-void HonorRoll::BubbleSort(vector<double> &num, vector<string> &name)
+void HonorRoll::BubbleSort(vector<double>& num, vector<string>& name)
 {
 	int i, j, flag = 1;
 	int temp;
@@ -613,7 +620,7 @@ void HonorRoll::BubbleSort(vector<double> &num, vector<string> &name)
 	for (i = 1; i < allAverages.size(); i++)
 	{
 		flag = 0;
-		for (j = 0; j < allAverages.size()-1; j++)
+		for (j = 0; j < allAverages.size() - 1; j++)
 		{
 			if (num[j + 1] < num[j])
 			{
@@ -652,7 +659,7 @@ void HonorRoll::fileOutput()
 		fprintf(fout, "%-20s %-15s\n", "Course:", "Grade:");
 		for (int j = 0; j < allStudentCourseNames.at(i).size(); j++)
 		{
-			
+
 			fprintf(fout, "%-20s %-15d\n", allStudentCourseNames.at(i).at(j).c_str(), allStudentGrades.at(i).at(j));
 		}
 		fprintf(fout, "\n");
